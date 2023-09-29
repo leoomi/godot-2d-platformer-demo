@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4kdcuqcu7rsc"]
+
+[ext_resource type="Script" path="res://scenes/debug/debug_info/DebugInfo.gd" id="1_belt0"]
+
+[node name="DebugInfo" type="CanvasLayer"]
+script = ExtResource("1_belt0")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

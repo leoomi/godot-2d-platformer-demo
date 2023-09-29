@@ -1,0 +1,159 @@
+[gd_scene load_steps=9 format=3 uid="uid://dc2c3mvf50imk"]
+
+[ext_resource type="PackedScene" uid="uid://0btuj42nxe1i" path="res://scenes/player/Player.tscn" id="1_himam"]
+[ext_resource type="PackedScene" uid="uid://d4kdcuqcu7rsc" path="res://scenes/debug/debug_info/DebugInfo.tscn" id="1_mmd43"]
+[ext_resource type="Script" path="res://DeathPlane.gd" id="3_1oh3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awc8g"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1dhq"]
+size = Vector2(40, 40)
+
+[sub_resource type="Animation" id="Animation_lydwf"]
+resource_name = "move_loop"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(445, 172), Vector2(608.585, 172)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3f8lx"]
+_data = {
+"move_loop": SubResource("Animation_lydwf")
+}
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3wvdv"]
+a = Vector2(-2323, 23)
+b = Vector2(3375, -9)
+
+[node name="Main" type="Node2D"]
+
+[node name="DebugInfo" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_mmd43")]
+player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("1_himam")]
+position = Vector2(98, 195)
+floor_snap_length = 16.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="World" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World"]
+position = Vector2(0, 238)
+scale = Vector2(21.2, 1)
+
+[node name="ColorRect" type="ColorRect" parent="World/StaticBody2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.00784314, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_awc8g")
+
+[node name="OneWay" type="StaticBody2D" parent="World"]
+position = Vector2(315, 171)
+scale = Vector2(2.08, 0.320001)
+
+[node name="ColorRect" type="ColorRect" parent="World/OneWay"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/OneWay"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_awc8g")
+one_way_collision = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="World"]
+position = Vector2(0, 238)
+rotation = -1.5708
+scale = Vector2(13.08, 1)
+
+[node name="ColorRect" type="ColorRect" parent="World/StaticBody2D2"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.00784314, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D2"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_awc8g")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="World"]
+position = Vector2(235, 147)
+rotation = -1.5708
+scale = Vector2(8.31377, 1.00004)
+
+[node name="ColorRect" type="ColorRect" parent="World/StaticBody2D4"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.00784314, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D4"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_awc8g")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="World"]
+position = Vector2(856, 400.999)
+rotation = -0.785398
+scale = Vector2(13.9027, 1)
+
+[node name="ColorRect" type="ColorRect" parent="World/StaticBody2D3"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.00784314, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D3"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_awc8g")
+
+[node name="MovingOneWay" type="AnimatableBody2D" parent="World"]
+position = Vector2(445, 172)
+scale = Vector2(1.8, 0.28)
+
+[node name="ColorRect" type="ColorRect" parent="World/MovingOneWay"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MovingOneWay"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_l1dhq")
+one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/MovingOneWay"]
+autoplay = "move_loop"
+libraries = {
+"": SubResource("AnimationLibrary_3f8lx")
+}
+
+[node name="Area2D" type="Area2D" parent="World"]
+position = Vector2(259, 543)
+script = ExtResource("3_1oh3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Area2D"]
+shape = SubResource("SegmentShape2D_3wvdv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(98, 195)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.15
+drag_right_margin = 0.15
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[connection signal="body_entered" from="World/Area2D" to="World/Area2D" method="_on_body_entered"]
