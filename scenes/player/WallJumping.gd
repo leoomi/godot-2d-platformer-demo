@@ -2,7 +2,7 @@ extends PlayerState
 
 func enter(msg := {}) -> void:
 	player.animation.play("jumping")
-	player.velocity.y = player.short_jump_velocity
+	player.velocity.y = player.wall_jump_velocity.y
 	player.velocity.x = msg.direction * player.wall_jump_velocity.x
 	player.flip(msg.direction)
 
@@ -10,7 +10,7 @@ func enter(msg := {}) -> void:
 	if not player.fsm.state.name == self.name:
 		return
 
-	state_machine.transition_to("Jumping")
+	state_machine.transition_to("Jumping", {"no_jump": true})
 
 func physics_update(delta: float):
 	if player.velocity.y >= 0 || player.is_on_ceiling():

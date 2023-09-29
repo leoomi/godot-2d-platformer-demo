@@ -5,6 +5,9 @@ var first_frame = false
 func enter(msg := {}) -> void:
 	player.animation.play("jumping")
 
+	if msg.has("no_jump") and msg.no_jump:
+		return
+
 	first_frame = true
 	if not msg.has("long_jump") or msg.long_jump:
 		player.velocity.y = player.jump_velocity

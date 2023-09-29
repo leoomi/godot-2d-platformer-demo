@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var acceleration = 750.0
 @export var short_jump_velocity = -300
 @export var jump_velocity = -400.0
-@export var wall_jump_velocity = Vector2(200, -400)
+@export var wall_jump_velocity = Vector2(150, -450)
 @onready var fsm: StateMachine = $StateMachine
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
