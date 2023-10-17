@@ -58,6 +58,7 @@ func handle_drop_from_platform() -> bool:
 func is_colliding_with_one_way() -> bool:
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
+		## TODO fix for tilemaps
 		if collision.get_collider_shape().one_way_collision:
 			return true
 

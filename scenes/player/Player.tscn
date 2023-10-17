@@ -206,7 +206,6 @@ texture_filter = 1
 texture = ExtResource("2_spc03")
 hframes = 8
 vframes = 12
-frame = 1
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)

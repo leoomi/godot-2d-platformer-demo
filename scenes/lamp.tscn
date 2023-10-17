@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d38rdpsvoe8n2"]
+
+[ext_resource type="Texture2D" uid="uid://bg510eurtl85o" path="res://assets/oak_woods_v1.0/decorations/lamp.png" id="1_qcmpb"]
+[ext_resource type="Texture2D" uid="uid://iuc134lhsx13" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="2_y72tn"]
+
+[node name="Lamp" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_qcmpb")
+centered = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(6, 23)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+texture = ExtResource("2_y72tn")
+texture_scale = 0.77
